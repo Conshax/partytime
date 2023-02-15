@@ -1,10 +1,9 @@
 import fetch from "node-fetch";
 import zip from "ramda/src/zip";
+import { getFeedText } from "src/shared";
 
-import { logger } from "../logger";
 import { parseFeed } from "../parser";
 import type { Episode, FeedObject } from "../parser/types";
-import { getFeedText } from "../shared";
 
 const podcastCertification = "https://podcastcertification.org";
 
@@ -27,8 +26,7 @@ export function checkCors(
       // resp.headers.has("access-control-allow-methods") &&
       // (resp.headers.get("access-control-allow-methods") as string[]).includes(methodToCheck)
     },
-    (err) => {
-      logger.error(err);
+    (_err) => {
       return false;
     }
   );

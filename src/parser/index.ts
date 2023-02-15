@@ -4,7 +4,6 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { logger } from "../logger";
 
 import { ParserOptions, unifiedParser } from "./unified";
 import { parse, validate } from "./xml-parser";
@@ -31,7 +30,7 @@ function handleValidFeed(xml: string, options?: ParserOptions): FeedObject | nul
   }
 
   if (!feedObj) {
-    logger.error("Parsing failed...");
+    console.error("Parsing failed...");
     return null;
   }
 
@@ -39,7 +38,7 @@ function handleValidFeed(xml: string, options?: ParserOptions): FeedObject | nul
 }
 
 function handleInvalidFeed(xml: string) {
-  logger.warn("invalid feed");
-  logger.warn(xml);
+  console.warn("invalid feed");
+  console.warn(xml);
   return null;
 }

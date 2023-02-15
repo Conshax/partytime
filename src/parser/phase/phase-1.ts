@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { ensureArray, firstIfArray, getAttribute, getKnownAttribute, getText } from "../shared";
 import type { FeedObject, XmlNode } from "../types";
-import { logger } from "../../logger";
 
 import type { FeedUpdate, ItemUpdate } from "./index";
 
@@ -24,8 +23,8 @@ export const locked: FeedUpdate = {
     const lockedText = getText(node).toLowerCase();
     const owner = getAttribute(node, "owner");
 
-    logger.debug(`- Owner: ${owner ?? ""}`);
-    logger.debug(`- Locked: ${lockedText}`);
+    console.debug(`- Owner: ${owner ?? ""}`);
+    console.debug(`- Locked: ${lockedText}`);
 
     if (["yes", "true"].includes(lockedText)) {
       feedUpdate.locked = true;
@@ -105,11 +104,11 @@ export const transcript: ItemUpdate = {
       const language = getAttribute(transcriptNode, "language") || feedLanguage;
       const rel = getAttribute(transcriptNode, "rel");
 
-      logger.debug(`- Feed Language: ${feedLanguage}`);
-      logger.debug(`- URL: ${url ?? "<null>"}`);
-      logger.debug(`- Type: ${type}`);
-      logger.debug(`- Language: ${language}`);
-      logger.debug(`- Rel: ${rel ?? "<null>"}`);
+      console.debug(`- Feed Language: ${feedLanguage}`);
+      console.debug(`- URL: ${url ?? "<null>"}`);
+      console.debug(`- Type: ${type}`);
+      console.debug(`- Language: ${language}`);
+      console.debug(`- Rel: ${rel ?? "<null>"}`);
 
       if (url && type) {
         const transcriptValue: Phase1Transcript = {

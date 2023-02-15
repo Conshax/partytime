@@ -3,8 +3,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
-import { logger } from "../logger";
-
 import {
   ensureArray,
   firstWithAttributes,
@@ -36,22 +34,22 @@ export function isValidItem(
 ): boolean {
   // If there is no enclosure, just skip this item and move on to the next
   if (!getEnclosure(item)) {
-    logger.warn("Item has no enclosure, skipping it.");
+    console.warn("Item has no enclosure, skipping it.");
     return false;
   }
 
   // If there is no guid in the item, then skip this item and move on
   if (!getGuid(item) && !allowMissingGuid) {
-    logger.warn("Item has no guid, skipping it.");
+    console.warn("Item has no guid, skipping it.");
     return false;
   }
   if (!getGuid(item) && allowMissingGuid) {
-    logger.warn("Item has no guid, but flag passed to allow it.");
+    console.warn("Item has no guid, but flag passed to allow it.");
   }
 
   // If there is no title or description
   if (!getTitle(item) && !getDescription(item)) {
-    logger.warn("Item has no title or description, skipping it.");
+    console.warn("Item has no title or description, skipping it.");
     return false;
   }
 
