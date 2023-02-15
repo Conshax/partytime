@@ -1,9 +1,20 @@
-import fetch from "node-fetch";
+import axios from "axios";
 import zip from "ramda/src/zip";
-import { getFeedText } from "src/shared";
 
 import { parseFeed } from "../parser";
 import type { Episode, FeedObject } from "../parser/types";
+
+async function getFeedText(uri: string): Promise<string> {
+  if (uri.startsWith(`http`)) {
+    const response = await axios.get(uri, {
+      headers: {
+        "user-agent": "partytime/conshax",
+      },
+    });
+    return response.data;
+  }
+  return "";
+}
 
 const podcastCertification = "https://podcastcertification.org";
 
@@ -14,7 +25,6 @@ export function checkCors(
 ): Promise<boolean> {
   return fetch(urlToCheck, {
     redirect: "follow",
-    follow: 20,
     method: "OPTIONS",
     headers: {
       origin,
@@ -26,7 +36,7 @@ export function checkCors(
       // resp.headers.has("access-control-allow-methods") &&
       // (resp.headers.get("access-control-allow-methods") as string[]).includes(methodToCheck)
     },
-    (_err) => {
+    (_err: any) => {
       return false;
     }
   );
@@ -39,7 +49,7 @@ export function checkHotlink(urlToCheck: string, referer = podcastCertification)
       referer,
       "user-agent": "partytime/hotlink-check",
     },
-  }).then((resp) => {
+  }).then((resp: { status: number }) => {
     return resp.status < 300 && resp.status >= 200;
   });
 }
@@ -51,7 +61,7 @@ export function checkHttps(urlToCheck: string, referer = podcastCertification): 
       referer,
       "user-agent": "partytime/https-check",
     },
-  }).then((resp) => {
+  }).then((resp: { status: number }) => {
     return resp.status < 300 && resp.status >= 200;
   });
 }
