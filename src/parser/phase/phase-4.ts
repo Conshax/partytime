@@ -191,7 +191,7 @@ export const podcastImages = {
                   density: parseFloat(components[1].replace(/x$/, "")),
                 };
               } else {
-                console.warn(components, "Unexpected descriptor");
+                console.debug(components, "Unexpected descriptor");
                 val.parsed = {
                   url: components[0],
                 };

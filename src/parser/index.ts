@@ -30,7 +30,7 @@ function handleValidFeed(xml: string, options?: ParserOptions): FeedObject | nul
   }
 
   if (!feedObj) {
-    console.error("Parsing failed...");
+    console.debug("Parsing failed...");
     return null;
   }
 
@@ -38,7 +38,7 @@ function handleValidFeed(xml: string, options?: ParserOptions): FeedObject | nul
 }
 
 function handleInvalidFeed(xml: string) {
-  console.warn("invalid feed");
-  console.warn(xml);
+  console.debug("invalid feed");
+  console.debug(xml);
   return null;
 }

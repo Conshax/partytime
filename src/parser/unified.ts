@@ -26,7 +26,7 @@ export type ParserOptions = {
 export function unifiedParser(theFeed: XmlNode, type: FeedType, options?: ParserOptions) {
   const epochDate = new Date(0);
   if (typeof theFeed.rss.channel === "undefined") {
-    console.warn("Provided XML has no channel node, unparsable");
+    console.debug("Provided XML has no channel node, unparsable");
     return null;
   }
 
@@ -77,7 +77,7 @@ export function unifiedParser(theFeed: XmlNode, type: FeedType, options?: Parser
       feedObj.newestItemPubDate
     );
   } else {
-    console.warn("Provided feed has no items to parse.");
+    console.debug("Provided feed has no items to parse.");
   }
 
   if (feedObj.newestItemPubDate && !feedObj.pubDate) {

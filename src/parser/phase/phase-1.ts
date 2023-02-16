@@ -78,8 +78,8 @@ function deriveMimeType(typeAttribute: string | null): TranscriptType {
     case "application/json":
       return TranscriptType.JSON;
     default:
-      console.warn("Unexpected transcript type", typeAttribute);
-      console.warn(" Please open an issue - https://github.com/RyanHirsch/partytime/issues");
+      console.debug("Unexpected transcript type", typeAttribute);
+      console.debug(" Please open an issue - https://github.com/RyanHirsch/partytime/issues");
       return TranscriptType.UNKNOWN;
   }
 }

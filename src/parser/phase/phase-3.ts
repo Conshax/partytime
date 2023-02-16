@@ -102,7 +102,7 @@ export const license = {
       )?.reference;
 
     if (!url) {
-      console.warn(
+      console.debug(
         `Missing License URL for ${identifier}, originating in ${feed.rss.channel.title as string}`
       );
       return {};
