@@ -10,7 +10,6 @@ import {
   getKnownAttribute,
   getText,
 } from "../shared";
-import { logger } from "../../logger";
 import type { EmptyObj, XmlNode } from "../types";
 
 import { json as licenseDefinitions } from "./licenses";
@@ -103,13 +102,13 @@ export const license = {
       )?.reference;
 
     if (!url) {
-      logger.warn(
+      console.debug(
         `Missing License URL for ${identifier}, originating in ${feed.rss.channel.title as string}`
       );
       return {};
     }
 
-    logger.debug(`license  [${identifier}](${url})`);
+    console.debug(`license  [${identifier}](${url})`);
     return {
       license: {
         identifier,

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { logger } from "../../logger";
 import {
   ensureArray,
   extractOptionalFloatAttribute,
@@ -192,7 +191,7 @@ export const podcastImages = {
                   density: parseFloat(components[1].replace(/x$/, "")),
                 };
               } else {
-                logger.warn(components, "Unexpected descriptor");
+                console.debug(components, "Unexpected descriptor");
                 val.parsed = {
                   url: components[0],
                 };

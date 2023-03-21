@@ -13,8 +13,6 @@ import mergeWith from "ramda/src/mergeWith";
 import concat from "ramda/src/concat";
 import mergeDeepRight from "ramda/src/mergeDeepRight";
 
-import { logger } from "../logger";
-
 import { ensureArray } from "./shared";
 import type { Episode, FeedType, PhaseUpdate, XmlNode } from "./types";
 import { updateFeed, updateItem } from "./phase";
@@ -28,7 +26,7 @@ export type ParserOptions = {
 export function unifiedParser(theFeed: XmlNode, type: FeedType, options?: ParserOptions) {
   const epochDate = new Date(0);
   if (typeof theFeed.rss.channel === "undefined") {
-    logger.warn("Provided XML has no channel node, unparsable");
+    console.debug("Provided XML has no channel node, unparsable");
     return null;
   }
 
@@ -79,7 +77,7 @@ export function unifiedParser(theFeed: XmlNode, type: FeedType, options?: Parser
       feedObj.newestItemPubDate
     );
   } else {
-    logger.warn("Provided feed has no items to parse.");
+    console.debug("Provided feed has no items to parse.");
   }
 
   if (feedObj.newestItemPubDate && !feedObj.pubDate) {

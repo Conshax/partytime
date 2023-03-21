@@ -5,7 +5,6 @@ import concat from "ramda/src/concat";
 import mergeDeepRight from "ramda/src/mergeDeepRight";
 import mergeWith from "ramda/src/mergeWith";
 
-import { logger } from "../../logger";
 import type { Episode, FeedObject, RSSFeed, XmlNode, PhaseUpdate, TODO } from "../types";
 
 import * as phase1 from "./phase-1";
@@ -112,25 +111,25 @@ export function updateFeed(theFeed: RSSFeed, feedUpdates = feeds): FeedUpdateRes
       const tagName = tag;
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const node = (nodeTransform ?? defaultNodeTransform)(theFeed.rss.channel[tagName]);
-      logger.trace(`Checking feed ${tagName} support`);
+      console.debug(`Checking feed ${tagName} support`);
       const tagSupported = node && (supportCheck ?? defaultSupportCheck)(node, XmlNodeSource.Feed);
 
       if (tagSupported) {
-        logger.info(`Feed supports ${tagName}`);
+        console.debug(`Feed supports ${tagName}`);
 
         try {
           const feedResult = fn(node, theFeed, XmlNodeSource.Feed);
-          logger.debug(feedResult, `Feed update for ${tagName}`);
+          console.debug(feedResult, `Feed update for ${tagName}`);
           return {
             feedUpdate: mergeWith(concat, feedUpdate, feedResult),
             phaseUpdate: mergeDeepRight(phaseUpdate, { [phase]: { [name ?? tag]: true } }),
           };
         } catch (err) {
-          logger.warn(err, `Exception thrown while trying to parse feed tag ${tagName}`);
+          console.debug(err, `Exception thrown while trying to parse feed tag ${tagName}`);
         }
       }
 
-      logger.trace(`Feed doesn't support ${tagName}`, node, tagSupported);
+      console.debug(`Feed doesn't support ${tagName}`, node, tagSupported);
       return {
         feedUpdate,
         phaseUpdate,
@@ -147,25 +146,25 @@ export function updateItem(item: XmlNode, feed: RSSFeed, itemUpdates = items): I
   return itemUpdates.reduce(
     ({ itemUpdate, phaseUpdate }, { phase, tag, fn, nodeTransform, supportCheck, name }) => {
       const tagName = tag;
-      logger.trace(`Checking feed item ${tagName} support`);
+      console.debug(`Checking feed item ${tagName} support`);
 
       const node = (nodeTransform ?? defaultNodeTransform)(item[tagName]);
       const tagSupported = node && (supportCheck ?? defaultSupportCheck)(node, XmlNodeSource.Item);
 
       if (tagSupported) {
-        logger.info(`Feed item supports ${tagName}`);
+        console.debug(`Feed item supports ${tagName}`);
         try {
           const itemResult = fn(node, feed, XmlNodeSource.Item);
-          logger.debug(itemResult, `Item update for ${tagName}`);
+          console.debug(itemResult, `Item update for ${tagName}`);
           return {
             itemUpdate: mergeWith(concat, itemUpdate, itemResult),
             phaseUpdate: mergeDeepRight(phaseUpdate, { [phase]: { [name ?? tag]: true } }),
           };
         } catch (err) {
-          logger.warn(err, `Exception thrown while trying to parse item tag ${tagName}`);
+          console.debug(err, `Exception thrown while trying to parse item tag ${tagName}`);
         }
       }
-      logger.trace(`Feed item doesn't support ${tagName}`, node, tagSupported);
+      console.debug(`Feed item doesn't support ${tagName}`, node, tagSupported);
       return {
         itemUpdate,
         phaseUpdate,

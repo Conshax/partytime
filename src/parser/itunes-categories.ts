@@ -175,7 +175,7 @@ export function categoryLookup(str: string): undefined | string {
     const pathSegments = str.split(">").map((x) => x.trim());
     if (pathSegments.length !== 2) {
       // eslint-disable-next-line no-console
-      console.warn("Unexpected category structure", str);
+      console.debug("Unexpected category structure", str);
     } else {
       const [parent, child] = pathSegments;
       const foundParent = itunesCategoriesSourceOfTruth.find(

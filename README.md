@@ -1,3 +1,11 @@
+# DISCLAIMER, PLEASE READ
+
+This is a fork of the original podcast-partytime to make the package usable in client-side applications.
+
+In order to make this work we dropped all backend dependencies and therefore also had to remove a lot of the package's tests.
+
+Please use this package with caution and don't expect the same stability as the original package.
+
 # Partytime Podcast Parser
 
 [![NPM version](https://img.shields.io/npm/v/podcast-partytime.svg)](https://www.npmjs.com/package/podcast-partytime)
@@ -22,9 +30,9 @@ import pt from "podcast-partytime";
 pt.checkFeedByUri("https://www.spreaker.com/show/3128218/episodes/feed").then(console.log);
 
 fetch("http://mp3s.nashownotes.com/pc20rss.xml", {
-   headers: {
+  headers: {
     "user-agent": "partytime/example",
-    }
+  },
 })
   .then((resp) => resp.text())
   .then((xml) =>
@@ -38,9 +46,9 @@ fetch("http://mp3s.nashownotes.com/pc20rss.xml", {
 
 // Parse Feed
 fetch("http://mp3s.nashownotes.com/pc20rss.xml", {
-   headers: {
+  headers: {
     "user-agent": "partytime/example",
-    }
+  },
 })
   .then((resp) => resp.text())
   .then((xml) => console.log(pt.parseFeed(xml)));

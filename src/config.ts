@@ -1,8 +1,4 @@
-import dotenv from "dotenv";
-
-dotenv.config();
-
-const environment = process.env.NODE_ENV ?? "development";
+const environment = "development";
 const defaultLevel = new Map([
   ["development", "info"],
   ["production", "warn"],

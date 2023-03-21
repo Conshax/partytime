@@ -2,9 +2,7 @@
   "compilerOptions": {
     "target": "es2018",
     "module": "commonjs",
-    "lib": [
-      "ESNext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "esModuleInterop": true,
     "strict": true,
     "strictNullChecks": true,
@@ -20,12 +18,6 @@
     "baseUrl": ".",
     "skipLibCheck": true
   },
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts",
-    "**/__test__/**/*.ts"
-  ],
-  "include": [
-    "src/**/*.ts"
-  ]
+  "exclude": ["node_modules", "**/*.spec.ts", "**/__test__/**/*.ts"],
+  "include": ["src/**/*.ts"]
 }
