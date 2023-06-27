@@ -23,8 +23,8 @@ export const locked: FeedUpdate = {
     const lockedText = getText(node).toLowerCase();
     const owner = getAttribute(node, "owner");
 
-    console.debug(`- Owner: ${owner ?? ""}`);
-    console.debug(`- Locked: ${lockedText}`);
+    // console.debug(`- Owner: ${owner ?? ""}`);
+    // console.debug(`- Locked: ${lockedText}`);
 
     if (["yes", "true"].includes(lockedText)) {
       feedUpdate.locked = true;
@@ -78,8 +78,8 @@ function deriveMimeType(typeAttribute: string | null): TranscriptType {
     case "application/json":
       return TranscriptType.JSON;
     default:
-      console.debug("Unexpected transcript type", typeAttribute);
-      console.debug(" Please open an issue - https://github.com/RyanHirsch/partytime/issues");
+      // console.debug("Unexpected transcript type", typeAttribute);
+      // console.debug(" Please open an issue - https://github.com/RyanHirsch/partytime/issues");
       return TranscriptType.UNKNOWN;
   }
 }
@@ -104,11 +104,11 @@ export const transcript: ItemUpdate = {
       const language = getAttribute(transcriptNode, "language") || feedLanguage;
       const rel = getAttribute(transcriptNode, "rel");
 
-      console.debug(`- Feed Language: ${feedLanguage}`);
-      console.debug(`- URL: ${url ?? "<null>"}`);
-      console.debug(`- Type: ${type}`);
-      console.debug(`- Language: ${language}`);
-      console.debug(`- Rel: ${rel ?? "<null>"}`);
+      // console.debug(`- Feed Language: ${feedLanguage}`);
+      // console.debug(`- URL: ${url ?? "<null>"}`);
+      // console.debug(`- Type: ${type}`);
+      // console.debug(`- Language: ${language}`);
+      // console.debug(`- Rel: ${rel ?? "<null>"}`);
 
       if (url && type) {
         const transcriptValue: Phase1Transcript = {

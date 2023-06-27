@@ -446,7 +446,7 @@ const handleCompoundCategory = (
     ) {
       categoriesSet.add(compoundCategory.result);
     } else {
-      console.debug(`Compound category wasn't in the allow list - ${compoundCategory.result}`);
+      // console.debug(`Compound category wasn't in the allow list - ${compoundCategory.result}`);
     }
   }
 };

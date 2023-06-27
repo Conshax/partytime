@@ -93,7 +93,7 @@ export const license = {
 
     return Boolean(identifier) && Boolean(url);
   },
-  fn(node: XmlNode, feed: XmlNode): EmptyObj | { license: Phase3License } {
+  fn(node: XmlNode, _feed: XmlNode): EmptyObj | { license: Phase3License } {
     const identifier = getText(node);
     const url =
       getAttribute(node, "url") ??
@@ -102,13 +102,13 @@ export const license = {
       )?.reference;
 
     if (!url) {
-      console.debug(
-        `Missing License URL for ${identifier}, originating in ${feed.rss.channel.title as string}`
-      );
+      // console.debug(
+      //   `Missing License URL for ${identifier}, originating in ${feed.rss.channel.title as string}`
+      // );
       return {};
     }
 
-    console.debug(`license  [${identifier}](${url})`);
+    // console.debug(`license  [${identifier}](${url})`);
     return {
       license: {
         identifier,
